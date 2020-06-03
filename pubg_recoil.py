@@ -23,6 +23,6 @@ def no_recoil(factor):
                 pg.moveTo(x, y + factor, duration=0)
         except KeyboardInterrupt:
             print('\nNo Recoil terminated!')
-            no_recoil(int(input('Enter New Factor >>> ')))
+            no_recoil(int(input('Enter shift amount >>> ')))
 
-no_recoil(int(input('Enter recoil factor: ')))
+no_recoil(int(input('Enter shift amount >>> ')))
