@@ -2,7 +2,8 @@ import pyautogui as pg
 import time, win32api
 import random
 
-def no_recoil(factor):
+def no_recoil():
+    shift_y = int(input('Enter shift amount >>> '))
     base_state = win32api.GetKeyState(0x01)
     now = 0
 
@@ -20,9 +21,10 @@ def no_recoil(factor):
             time.sleep(0.001)
             if now:
                 x, y = pg.position()
-                pg.moveTo(x, y + factor, duration=0)
+                pg.moveTo(x, y + shift_y, duration=0)
         except KeyboardInterrupt:
             print('\nNo Recoil terminated!')
-            no_recoil(int(input('Enter shift amount >>> ')))
+            no_recoil()
 
-no_recoil(int(input('Enter shift amount >>> ')))
+if __name__ == '__main__':
+    no_recoil()
