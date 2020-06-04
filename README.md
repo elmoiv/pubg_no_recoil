@@ -8,6 +8,9 @@ Undetectable and Legit No Recoil for PUBG/PUBG Mobile
 -   You can use this script with any game that have recoil.
 
 ## Usage
- - Run the script
- - Use arrow keys `(UP/DOWN)` to adjust recoil shift
- - Use `~` key to Pause/Resume the script
+ - Run the script.
+ - Use arrow keys `(UP/DOWN)` to adjust recoil shift.
+ - Use `~` key to Pause/Resume the script.
+
+## Note
+*If encountered any issue with the release, run it as Administrator.*
