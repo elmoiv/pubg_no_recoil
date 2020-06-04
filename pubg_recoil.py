@@ -1,17 +1,33 @@
 import pyautogui as pg
-import time, win32api, winsound, random
+import time, win32api, winsound, random, os
 from threading import Thread
 
-switch, shift_y = 0, 0
+# Record changes in shift
+HIST = 0
+def save_cfg():
+    global HIST
+    if shift_y != HIST:
+        HIST = shift_y
+        with open('pubg_recoil.cfg', 'w') as cfg:
+            cfg.write(str(HIST))
+
+# Getting saved value
+shift_y = 0
+if os.path.exists('pubg_recoil.cfg'):
+    shift_y = int(open('pubg_recoil.cfg', 'r').read())
+
+GETKEY = win32api.GetKeyState
+switch = 0
 
 def no_recoil():
-    global switch, shift_y
-    shift_y = int(input('Enter shift amount >>> '))
-    base_state = win32api.GetKeyState(0x01)
+    base_state = GETKEY(0x01)
     now = 0
 
     while True:
-
+        
+        # Record changes
+        save_cfg()
+        
         # Displayed text conf
         state_t = ['IDLE', 'SHOOTING'][now].center(10)
         switch_t = ['OFF', 'ON '][switch].center(7)
@@ -22,7 +38,7 @@ def no_recoil():
         if not switch:
             continue
         try:
-            current_state = win32api.GetKeyState(0x01)
+            current_state = GETKEY(0x01)
             
             if current_state != base_state:
                 base_state = current_state
@@ -47,14 +63,14 @@ def no_recoil():
 def switcher():
     global switch, shift_y
 
-    base_state = win32api.GetKeyState(0xC0)
-    base_up = win32api.GetKeyState(0x26)
-    base_down = win32api.GetKeyState(0x28)
+    base_state = GETKEY(0xC0)
+    base_up = GETKEY(0x26)
+    base_down = GETKEY(0x28)
     
     while True:
-        current_state = win32api.GetKeyState(0xC0)
-        current_up = win32api.GetKeyState(0x26)
-        current_down = win32api.GetKeyState(0x28)
+        current_state = GETKEY(0xC0)
+        current_up = GETKEY(0x26)
+        current_down = GETKEY(0x28)
         
         # Pause/Resume script
         if current_state != base_state:
