@@ -2,7 +2,7 @@
 Undetectable and Legit No Recoil for PUBG/PUBG Mobile
 
 ## Preview
-![Preview](https://media.giphy.com/media/W5TXFkxrUjlwVKrn03/giphy.gif)
+![](https://media.giphy.com/media/W5TXFkxrUjlwVKrn03/giphy.gif)
 
 ## Features
 -   Legit and Undetectable.
