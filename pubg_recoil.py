@@ -19,9 +19,12 @@ if os.path.exists('pubg_recoil.cfg'):
 GETKEY = win32api.GetKeyState
 switch = 0
 
+# List of hex key codes
+# https://docs.microsoft.com/en-us/windows/win32/inputdev/virtual-key-codes
 def no_recoil():
+    # 0x01: Left mouse button
     base_state = GETKEY(0x01)
-    now = 0
+    now, s = 0, ''
 
     while True:
         
@@ -30,12 +33,18 @@ def no_recoil():
         
         # Displayed text conf
         state_t = ['IDLE', 'SHOOTING'][now].center(10)
-        switch_t = ['OFF', 'ON '][switch].center(7)
-        shift_y_t = str(shift_y).center(6)
-        print('\r', state_t, switch_t, shift_y_t, end='\r', sep='|')
+        switch_t = [' OFF', ' ON'][switch].center(10)
+        s = shift_y
+        if shift_y == 25:
+            s = 'MAX - 25'
+        if shift_y == 0:
+            s = 'MIN - 0'
+        shift_y_t = str(s).center(16)
+        print('\r                            ', state_t, switch_t, shift_y_t, '', end='\r', sep='|')
 
         # If paused then skip
         if not switch:
+            now = 0
             continue
         try:
             current_state = GETKEY(0x01)
@@ -63,6 +72,9 @@ def no_recoil():
 def switcher():
     global switch, shift_y
 
+    # 0xC0: ~ Key
+    # 0x26: Up Arrow
+    # 0x28: Down Arrow
     base_state = GETKEY(0xC0)
     base_up = GETKEY(0x26)
     base_down = GETKEY(0x28)
@@ -93,6 +105,19 @@ def switcher():
         time.sleep(0.2)
  
 if __name__ == '__main__':
+    print('''
+██████╗ ██╗   ██╗██████╗  ██████╗     ███╗   ██╗ ██████╗     ██████╗ ███████╗ ██████╗ ██████╗ ██╗██╗      
+██╔══██╗██║   ██║██╔══██╗██╔════╝     ████╗  ██║██╔═══██╗    ██╔══██╗██╔════╝██╔════╝██╔═══██╗██║██║      
+██████╔╝██║   ██║██████╔╝██║  ███╗    ██╔██╗ ██║██║   ██║    ██████╔╝█████╗  ██║     ██║   ██║██║██║      
+██╔═══╝ ██║   ██║██╔══██╗██║   ██║    ██║╚██╗██║██║   ██║    ██╔══██╗██╔══╝  ██║     ██║   ██║██║██║     
+██║     ╚██████╔╝██████╔╝╚██████╔╝    ██║ ╚████║╚██████╔╝    ██║  ██║███████╗╚██████╗╚██████╔╝██║███████╗
+╚═╝      ╚═════╝ ╚═════╝  ╚═════╝     ╚═╝  ╚═══╝ ╚═════╝     ╚═╝  ╚═╝╚══════╝ ╚═════╝ ╚═════╝ ╚═╝╚══════╝
+                                             V 1.0
+                                          BY: ELMOIV
+                                    https://github.com/elmoiv
+
+                            |   STATE  |  SWITCH  |  RECOIL SHIFT  |
+                             ---------- ---------- ----------------''')
     # Threading functions to allow live customization
     Thread(target=no_recoil).start()
     Thread(target=switcher).start()
