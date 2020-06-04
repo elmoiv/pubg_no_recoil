@@ -1,6 +1,9 @@
 # pubg_no_recoil
 Undetectable and Legit No Recoil for PUBG/PUBG Mobile
 
+## Preview
+![](https://media.giphy.com/media/W5TXFkxrUjlwVKrn03/giphy.gif)
+
 ## Features
 -   Legit and Undetectable.
 -   Ability to save current config for future usage.
